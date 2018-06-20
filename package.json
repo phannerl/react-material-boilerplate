@@ -94,6 +94,8 @@
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "csstype": "^2.5.5",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.9.1",
     "fork-ts-checker-webpack-plugin": "^0.4.2",
     "glob": "^7.1.2",
     "gulp": "^3.9.1",
@@ -108,7 +110,7 @@
   "scripts": {
     "start": "react-scripts start",
     "eject": "react-scripts eject",
-    "lint": "eslint --fix . --ext .js,.jsx src",
+    "lint": "eslint --fix --ignore-path .gitignore .",
     "lint:auto-fix": "tslint --fix 'src/**/*.{ts,tsx}'",
     "build": "node scripts/build.js",
     "build:lang": "node ./src/i18n/translator.js",
