@@ -42,7 +42,7 @@ class Setting extends React.Component {
                 </ListItemIcon>
                 <ListItemText primary="Vietnam"/>
                 <ListItemSecondaryAction>
-                  <Switch onChange={() => switchLang(newLang)} checked={lang !== 'en'}/>
+                  <Switch onChange={() => switchLang(newLang)} checked={lang !== 'ja'}/>
                 </ListItemSecondaryAction>
               </ListItem>
           </List>
