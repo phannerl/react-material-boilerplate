@@ -1,0 +1,20 @@
+import createStyles from '@material-ui/core/styles/createStyles';
+const textfieldStyle = (theme) => createStyles({
+    edit: {
+        // alignContent: 'center',
+        fontSize: '14px',
+        flex: 1,
+        padding: 0,
+        display: 'flex',
+        alignItems: 'center',
+        borderBottom: '0px',
+        color: 'black',
+    },
+    input: {
+        color: 'black',
+    },
+    container: {
+        width: '100%',
+    },
+});
+export default textfieldStyle;

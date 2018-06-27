@@ -1,5 +1,5 @@
 import createStyles from '@material-ui/core/styles/createStyles';
-import { primaryColor, dangerColor, defaultFont } from 'theme/default';
+import { primaryColor, defaultFont } from 'theme/default';
 const taskStyle = (theme) => createStyles({
     // ...tooltipStyle,
     // ...checkboxAdnRadioStyle,
@@ -7,23 +7,24 @@ const taskStyle = (theme) => createStyles({
         marginBottom: '0',
         overflow: 'visible',
     },
-    tableRow: {
-        // position: 'relative',
-        borderBottom: '1px solid #dddddd',
-        display: 'flex',
-        // flex: 1,
-        flexDirection: 'row',
-        height: 'auto',
-    },
+    // tableRow: {
+    //   // position: 'relative',
+    //   borderBottom: '1px solid #dddddd',
+    //   display: 'flex',
+    //   // flex: 1,
+    //   flexDirection: 'row',
+    //   height: 'auto',
+    // },
     textRoot: {
         width: '100%',
     },
-    tableActions: {
-        display: 'flex',
-        border: 'none',
-        padding: '12px 0px !important',
-        verticalAlign: 'middle',
-    },
+    // tableActions: {
+    //   display: 'flex',
+    //   border: 'none',
+    //   padding: '12px 0px !important',
+    //   verticalAlign: 'middle',
+    //   // width: '10px',
+    // },
     tableCell: {
         ...defaultFont,
         // padding: '8px',
@@ -32,24 +33,24 @@ const taskStyle = (theme) => createStyles({
         // lineHeight: '1.42857143',
         fontSize: '14px',
     },
-    tableActionButton: {
-        width: '27px',
-        height: '27px',
-    },
-    tableActionButtonIcon: {
-        width: '17px',
-        height: '17px',
-    },
-    edit: {
-        backgroundColor: 'transparent',
-        color: primaryColor,
-        boxShadow: 'none',
-    },
-    close: {
-        backgroundColor: 'transparent',
-        color: dangerColor,
-        boxShadow: 'none',
-    },
+    // tableActionButton: {
+    //   width: '27px',
+    //   height: '27px',
+    // },
+    // tableActionButtonIcon: {
+    //   width: '17px',
+    //   height: '17px',
+    // },
+    // edit: {
+    //   backgroundColor: 'transparent',
+    //   color: primaryColor,
+    //   boxShadow: 'none',
+    // },
+    // close: {
+    //   backgroundColor: 'transparent',
+    //   color: dangerColor,
+    //   boxShadow: 'none',
+    // },
     tooltip: {
         padding: '10px 15px',
         minWidth: '130px',
@@ -74,30 +75,30 @@ const taskStyle = (theme) => createStyles({
         whiteSpace: 'normal',
         lineBreak: 'auto',
     },
-    rootCellCheck: {
-        // width: '5px',
-        padding: 0,
-        borderBottom: '0px',
-    },
-    rootCheck: {
-        justifyContent: 'left',
-    },
-    checked: {
-        color: primaryColor + '!important',
-    },
-    checkedIcon: {
-        width: '20px',
-        height: '20px',
-        border: '1px solid rgba(0, 0, 0, .54)',
-        borderRadius: '3px',
-    },
-    uncheckedIcon: {
-        width: '0px',
-        height: '0px',
-        padding: '10px',
-        border: '1px solid rgba(0, 0, 0, .54)',
-        borderRadius: '3px',
-    },
+    // rootCellCheck: {
+    //   // width: '5px',
+    //   padding: 0,
+    //   borderBottom: '0px',
+    // },
+    // rootCheck: {
+    //   justifyContent: 'left',
+    // },
+    // checked: {
+    //     color: primaryColor + '!important',
+    //   },
+    // checkedIcon: {
+    //   width: '20px',
+    //   height: '20px',
+    //   border: '1px solid rgba(0, 0, 0, .54)',
+    //   borderRadius: '3px',
+    // },
+    // uncheckedIcon: {
+    //   width: '0px',
+    //   height: '0px',
+    //   padding: '10px',
+    //   border: '1px solid rgba(0, 0, 0, .54)',
+    //   borderRadius: '3px',
+    // },
     inputNewTask: {
         color: 'black',
     },
@@ -119,16 +120,6 @@ const taskStyle = (theme) => createStyles({
     },
     createTaskField: {
         width: '100%',
-    },
-    editTextField: {
-        // alignContent: 'center',
-        fontSize: '14px',
-        flex: 1,
-        padding: 0,
-        display: 'flex',
-        alignItems: 'center',
-        borderBottom: '0px',
-        color: 'black',
     },
 });
 export default taskStyle;

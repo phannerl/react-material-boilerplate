@@ -22,17 +22,17 @@ class AppTab extends React.Component {
             [classes.cardTitleRTL]: rtlActive,
         });
         return (<AppCard plain={false}>
-            <CardHeader color={headerColor} plain={plainTabs}>
-            {title !== undefined ? (<div className={cardTitle}>{title}</div>) : null}
-            {renderLeft
+                <CardHeader color={headerColor} plain={plainTabs} tabSeletedId={this.state.value}>
+                {title !== undefined ? (<div className={cardTitle}>{title}</div>) : null}
+                {renderLeft
             ? (<div className={cardTitle}> {renderLeft()} </div>)
             : null}
-            <Tabs value={this.state.value} onChange={this.handleChange} classes={{
+                <Tabs value={this.state.value} onChange={this.handleChange} classes={{
             root: classes.tabsRoot,
             indicator: classes.displayNone,
             scrollButtons: classes.scrollableTab,
         }} scrollable scrollButtons="auto">
-                {tabs.map((prop, key) => {
+                    {tabs.map((prop, key) => {
             let icon = {};
             if (prop.tabIcon) {
                 icon = {
@@ -47,17 +47,18 @@ class AppTab extends React.Component {
                 wrapper: classes.tabWrapper,
             }} key={key} label={prop.tabName} {...icon}/>);
         })}
-            </Tabs>
-            </CardHeader>
-            <CardBody>
-            {tabs.map((prop, key) => {
+                </Tabs>
+                </CardHeader>
+                
+                <CardBody>
+                {tabs.map((prop, key) => {
             if (key === this.state.value) {
                 return <div key={key}>{prop.tabContent}</div>;
             }
             return null;
         })}
-            </CardBody>
-      </AppCard>);
+                </CardBody>
+        </AppCard>);
     }
 }
 export default (withStyles(appTabStyle)(AppTab));

@@ -1,6 +1,7 @@
 import { Switch } from 'react-router';
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { mapObjIndexed, values, compose, omit } from 'ramda';
 import { getPageList } from '../helper/module';
 import { withStyles } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
@@ -14,9 +15,13 @@ class AppRouter extends React.Component {
     constructor() {
         super(...arguments);
         this.renderDashBoard = (props) => {
-            console.log('props renderDashBoard', props);
-            const routesRender = pages.map((page, index) => (<Route {...page} key={index}/>));
-            return (<DashBoard routes={pages} {...props}>
+            const convertRouteComponent = mapObjIndexed((page, key) => (<Route {...page} key={key}/>));
+            const routesRender = compose(values, convertRouteComponent)(pages);
+            const pageIgnore = [
+                'todoSingle',
+            ];
+            const slidebarRoutes = compose(values, omit(pageIgnore))(pages);
+            return (<DashBoard routes={values(pages)} {...props}>
         <Switch>
           {routesRender}
         </Switch>

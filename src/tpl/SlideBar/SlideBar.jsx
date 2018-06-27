@@ -1,11 +1,8 @@
 import * as React from 'react';
-import * as cx from 'classnames';
-import { NavLink } from 'react-router-dom';
-import { withStyles, Drawer, Hidden, List, ListItem, 
-// ListItemIcon,
-ListItemText, } from '@material-ui/core';
 import styles from './SlideBar.style';
-import { FormattedMessage } from 'react-intl';
+import { split } from 'ramda';
+import { withStyles, Drawer, Hidden, List, } from '@material-ui/core';
+import AppLink from './component/AppLink';
 class SlideBar extends React.Component {
     renderBrand() {
         const { classes, 
@@ -13,37 +10,20 @@ class SlideBar extends React.Component {
         logoText, } = this.props;
         return (<div className={classes.logo}>
         <a href="/dashboard" className={classes.logoLink}>
-          
           {logoText}
         </a>
       </div>);
     }
     activeRoute(routeName) {
-        return this.props.location.pathname.indexOf(routeName) > -1 ? true : false;
+        const { pathname } = this.props.location;
+        return split('/')(routeName)[1] === split('/')(pathname)[1];
+        // return this.props.location.pathname === routeName
         // return true;
     }
     renderLink() {
         const { classes, routes, color } = this.props;
         return (<List>
-        {routes.map((prop, key) => {
-            if (prop.redirect)
-                return null;
-            const listItemClasses = cx({
-                [' ' + classes[color]]: this.activeRoute(prop.path),
-            });
-            const whiteFontClasses = cx({
-                [' ' + classes.whiteFont]: this.activeRoute(prop.path),
-            });
-            const sidebarName = prop.sidebarI18nId
-                ? <FormattedMessage id={prop.sidebarI18nId}/>
-                : prop.sidebarName;
-            return (<NavLink to={prop.path} className={classes.item} activeClassName="active" key={key}>
-              <ListItem button className={classes.itemLink + listItemClasses}>
-                
-                <ListItemText primary={sidebarName} className={classes.itemText + whiteFontClasses} disableTypography={true}/>
-              </ListItem>
-            </NavLink>);
-        })}
+        {routes.map((prop, key) => <AppLink color={color} isActive={this.activeRoute(prop.path)} sidebarI18nId={prop.sidebarI18nId} sidebarName={prop.sidebarName} path={prop.path} key={key}/>)}
       </List>);
     }
     render() {

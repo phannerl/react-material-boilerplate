@@ -10,6 +10,7 @@ class Sample extends React.Component {
       {'This text is raw'}
       <div className={classes.textEffect}>
         {'This text is effected'}
+        <h1 className={classes.textEffect}>Cool stuff</h1>
       </div>
       </div>);
     }

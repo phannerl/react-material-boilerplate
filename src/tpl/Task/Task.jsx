@@ -1,15 +1,11 @@
 import * as React from 'react';
-import { withStyles, Table, TableBody, TableRow, TableCell, Checkbox, Tooltip, IconButton, TextField } from '@material-ui/core';
+import { withStyles, Table, TableBody } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { range } from 'ramda';
 import { v4 } from 'uuid';
-import * as cs from 'classnames';
-// @material-ui/icons
-import Edit from '@material-ui/icons/Edit';
-import Close from '@material-ui/icons/Close';
-import Check from '@material-ui/icons/Check';
 import taskStyle from './Task.style';
 import { updateTask, addTask, deleteTask } from 'module/todo/logic.redux/action';
+import AppTextField from '../TextField/AppTextField';
+import TaskRow from './component/TaskRow';
 class Task extends React.Component {
     constructor() {
         super(...arguments);
@@ -60,62 +56,32 @@ class Task extends React.Component {
                 event.preventDefault();
             }
         };
+        this.onSubmitNewTask = (text) => {
+            const { tag } = this.props;
+            this.props.newTask({
+                completed: false,
+                title: text,
+                tags: [tag],
+                id: v4(),
+            });
+        };
     }
     render() {
-        const { classes, tasksIndexes, tasks, tag } = this.props;
-        const taskOrder = tasksIndexes ? tasksIndexes : range(0, tasks.length);
+        const { classes, tasksIndex, tasks, tag } = this.props;
+        const taskOrder = tasksIndex;
         return (<div>
-        <TextField inputProps={{
-            className: classes.inputNewTask,
-        }} InputLabelProps={{
-            style: {
-                color: 'black',
-            },
-        }} className={classes.createTaskField} label={'New Task'} onChange={this.onChange} onKeyPress={event => this.onKeyPress(event, tag)}/>
+        <AppTextField onSubmit={this.onSubmitNewTask} label="New Task"/>
         <Table className={classes.table}>
           <TableBody>
-            {taskOrder.map(value => (<TableRow key={value} className={classes.tableRow}>
-                <TableCell classes={{
-            root: cs(classes.rootCellCheck),
-        }}>
-                  <Checkbox checked={tasks[value].completed} tabIndex={-1} onClick={() => this.props.updateTask(tasks[value].id, {
-            ...tasks[value],
-            completed: !tasks[value].completed,
-        })} checkedIcon={<Check className={classes.checkedIcon}/>} icon={<Check className={classes.uncheckedIcon}/>} classes={{
-            checked: classes.checked,
-            root: classes.rootCheck,
-        }}/>
-                </TableCell>
-                <TableCell classes={{
-            root: cs(classes.editTextField),
-        }}>
-                  {tasks[value].id !== this.state.editTaskId
-            ? tasks[value].title
-            : <TextField value={this.state.editTaskText} onChange={this.onChangeEdit} autoFocus={true} onKeyPress={event => this.onKeyPressEdit(event, tasks[value])} className={classes.editTextField}/>}
-                </TableCell>
-                <TableCell className={classes.tableActions}>
-                  <Tooltip id="tooltip-top" title="Edit Task" placement="top" classes={{ tooltip: classes.tooltip }}>
-                    <IconButton aria-label="Edit" className={classes.tableActionButton}>
-                      <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} onClick={() => this.setState({
-            editTaskId: tasks[value].id,
-            editTaskText: tasks[value].title,
-        })}/>
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip id="tooltip-top-start" title="Remove" placement="top" classes={{ tooltip: classes.tooltip }}>
-                    <IconButton aria-label="Close" className={classes.tableActionButton}>
-                      <Close className={classes.tableActionButtonIcon + ' ' + classes.close} onClick={() => this.props.onDeleteTask(tasks[value].id)}/>
-                    </IconButton>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>))}
+            {tasks.map(index => (<TaskRow taskId={index} key={index}/>))}
           </TableBody>
         </Table>
       </div>);
     }
 }
 const mapStateToProps = (state) => ({
-// ...mapStateToProps
+    // ...mapStateToProps
+    tasksIndex: state.todo.tasksIndex,
 });
 const mapDispatchToProps = (dispatch, props) => ({
     // ...mapDispatchToProps

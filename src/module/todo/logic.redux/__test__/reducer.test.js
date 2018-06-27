@@ -17,9 +17,13 @@ describe('todos reducer', () => {
             payload: sampleTest,
         })).toEqual({
             ...initialState,
-            tasks: [
+            tasks: {
                 ...initialState.tasks,
-                sampleTest,
+                [sampleTest.id]: sampleTest,
+            },
+            tasksIndex: [
+                ...initialState.tasksIndex,
+                sampleTest.id,
             ],
         });
     });
