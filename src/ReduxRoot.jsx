@@ -10,7 +10,8 @@ const onBeforeLift = () => {
 };
 class ReduxRoot extends React.Component {
     render() {
-        return (<Provider store={store}>
+        return (
+            <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor} onBeforeLift={onBeforeLift}>
                     <App />
                 </PersistGate>

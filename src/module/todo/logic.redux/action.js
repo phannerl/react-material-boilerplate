@@ -11,6 +11,12 @@ export const addTask = (task) => {
         payload: task,
     };
 };
+export const addTag = (tag) => {
+    return {
+        type: actionType.ADD_TAG,
+        payload: tag,
+    };
+};
 export const deleteTask = (id) => {
     return {
         type: actionType.DELETE_TASK,

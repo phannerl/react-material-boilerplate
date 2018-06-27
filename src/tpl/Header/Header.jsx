@@ -5,11 +5,16 @@ import * as cx from 'classnames';
 import styles from './Header.style';
 import MenuIcon from '@material-ui/icons/Menu';
 import { FormattedMessage } from 'react-intl';
+import pathToExp from 'path-to-regexp';
 class Header extends React.Component {
+    isPathInRoute(pathname, routePath) {
+        const re = pathToExp(routePath);
+        return re.exec(pathname);
+    }
     makeBrand() {
         const { routes, location: { pathname } } = this.props;
         for (const prop of routes) {
-            if (prop.path === pathname) {
+            if (this.isPathInRoute(pathname, prop.path)) {
                 if (prop.navBarI18nId) {
                     return <FormattedMessage id={prop.navBarI18nId}/>;
                 }

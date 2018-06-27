@@ -3,6 +3,9 @@ import { withStyles } from '@material-ui/core';
 import * as classNames from 'classnames';
 import cardHeaderStyle from './CardHeader.style';
 class CardHeader extends React.Component {
+    shouldComponentUpdate(nextProps) {
+        return nextProps.tabSeletedId !== this.props.tabSeletedId;
+    }
     render() {
         const { classes, className, children, color, plain, stats, icon, ...rest } = this.props;
         const cardHeaderClasses = classNames({
