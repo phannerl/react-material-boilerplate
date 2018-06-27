@@ -1,20 +1,29 @@
-{
-  "en": {
-    "Setting.title": "Setting",
-    "Setting.theme": "Theme",
-    "Setting.darkTheme": "Dark",
-    "Dashboard.title": "Dashboard",
-    "Home.title": "Home",
-    "Sample.title": "Sample",
-    "Todo.title": "Todo"
+{  
+  "en":{  
+     "Setting.title":"Setting",
+     "Setting.theme":"Theme",
+     "Setting.darkTheme":"Dark",
+     "Dashboard.title":"Dashboard",
+     "Home.title":"Home",
+     "Sample.title":"Sample",
+     "Todo.title":"Todo"
   },
-  "vi": {
-    "Setting.title": "Cài đặt",
-    "Setting.theme": "Giao diện",
-    "Setting.darkTheme": "Tối",
-    "Dashboard.title": "Bảng điều khiển",
-    "Home.title": "Trang chính",
-    "Sample.title": "Mẫu",
-    "Todo.title": "Tác vụ"
+  "vi":{  
+     "Setting.title":"Cài đặt",
+     "Setting.theme":"Giao diện",
+     "Setting.darkTheme":"Tối",
+     "Dashboard.title":"Bảng điều khiển",
+     "Home.title":"Trang chính",
+     "Sample.title":"Mẫu",
+     "Todo.title":"Tác vụ"
+  },
+  "ja":{
+     "Setting.title":"インストール",
+     "Setting.theme":"インタフェース",
+     "Setting.darkTheme":"暗い",
+     "Dashboard.title":"コントロールパネル",
+     "Home.title":"メインページ",
+     "Sample.title":"サンプル",
+     "Todo.title":"やるべきこと"
   }
 }

@@ -1,5 +1,6 @@
 import actionType from './actionType';
 import { initialState } from './initalState';
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionType.CHANGE_THEME: {

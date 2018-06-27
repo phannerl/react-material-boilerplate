@@ -5,7 +5,7 @@ import * as cx from 'classnames';
 import styles from './Header.style';
 import MenuIcon from '@material-ui/icons/Menu';
 import { FormattedMessage } from 'react-intl';
-import * as pathToExp from 'path-to-regexp';
+import pathToExp from 'path-to-regexp';
 class Header extends React.Component {
     isPathInRoute(pathname, routePath) {
         const re = pathToExp(routePath);
