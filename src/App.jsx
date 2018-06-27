@@ -4,15 +4,21 @@ import { connect } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import * as en from 'react-intl/locale-data/en';
 import * as vi from 'react-intl/locale-data/vi';
+
+import * as ja from 'react-intl/locale-data/ja';
+
 import { AppRoute } from './router/router';
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 import { getTheme } from './theme/themeHelper';
 const messages = require('./i18n/build.json');
-addLocaleData([...en, ...vi]);
+
+addLocaleData([...en, ...vi, ...ja]);
+
 class App extends React.Component {
     render() {
         const { paletteType, lang } = this.props;
-        return (<IntlProvider locale={lang} messages={messages[lang]}>
+        return (
+            <IntlProvider locale={lang} messages={messages[lang]}>
                 <MuiThemeProvider theme={getTheme(paletteType)}>
                     <CssBaseline />
                     <AppRoute />

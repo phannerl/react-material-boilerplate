@@ -43,5 +43,24 @@ const sampleStyle = (theme) => createStyles({
         padding: '0',
         width: '300px'
     },
+
+    left: {
+        width: '50%',
+        float: 'left'
+    },
+
+    right: {
+        width: '50%',
+        float: 'left'
+    },
+
+    wordday: {
+        paddingTop: '10px'
+    },
+
+    card: {
+        width: '250px',
+        height: '250px',
+    }
 });
 export default sampleStyle;

@@ -17,13 +17,13 @@
      "Sample.title":"Mẫu",
      "Todo.title":"Tác vụ"
   },
-  "ja":{  
+  "ja":{
      "Setting.title":"インストール",
      "Setting.theme":"インタフェース",
      "Setting.darkTheme":"暗い",
      "Dashboard.title":"コントロールパネル",
      "Home.title":"メインページ",
-     "Sample.title":"Mẫu",
-     "Todo.title":"Tác vụ"
+     "Sample.title":"サンプル",
+     "Todo.title":"やるべきこと"
   }
 }

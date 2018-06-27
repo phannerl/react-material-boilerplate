@@ -3,5 +3,5 @@ export const initialState = from({
     theme: {
         paletteType: 'light',
     },
-    lang: 'en',
+    lang: 'ja',
 });

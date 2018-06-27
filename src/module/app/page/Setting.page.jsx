@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 import { withStyles, FormGroup, FormControlLabel, List, ListSubheader, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction, } from '@material-ui/core';
 import styles from './Setting.style';
 import Switch from '@material-ui/core/Switch';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 import { changeTheme, changeLanguage } from '../logic.redux/action';
 import { Palette, Language } from '@material-ui/icons';
 import { FormattedMessage } from 'react-intl';
+
 class Setting extends React.Component {
     renderSwitch(title, switchOptions) {
         const { onChange, label } = switchOptions;
@@ -19,8 +23,8 @@ class Setting extends React.Component {
     }
     render() {
         const { classes, lang, switchTheme, paletteType, switchLang } = this.props;
-        const newLang = lang === 'vi' ? 'en' : 'vi';
-        console.log('RENDER PAGE');
+        //const newLang = lang === 'ja' ? 'vi' : 'ja';
+        //console.log('RENDER PAGE', newLang);
         return (<div>
         <FormGroup classes={{ root: classes.root }}>
           <List subheader={<ListSubheader><FormattedMessage id={'Setting.theme'}/></ListSubheader>}>
@@ -42,8 +46,13 @@ class Setting extends React.Component {
                 </ListItemIcon>
                 <ListItemText primary="Vietnam"/>
                 <ListItemSecondaryAction>
-                  <Switch onChange={() => switchLang(newLang)} checked={lang !== 'ja'}/>
-                </ListItemSecondaryAction>
+                    <Select onChange={(event) => switchLang(event.target.value)} value={lang}>
+                    <MenuItem value="en">English</MenuItem>
+                    <MenuItem value="vi">Vietnam</MenuItem>
+                    <MenuItem value="ja">Japan</MenuItem>
+                  </Select>
+              </ListItemSecondaryAction>
+
               </ListItem>
           </List>
         </FormGroup>
