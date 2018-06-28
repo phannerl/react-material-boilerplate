@@ -1,6 +1,6 @@
 {
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 9,
     "sourceType": "module",
     "ecmaFeatures": {
         "jsx": true,
@@ -8,6 +8,7 @@
         "experimentalObjectRestSpread": true
     }
   },
+  "parser": "babel-eslint",
   "plugins": [
       "react"
   ],
@@ -22,7 +23,7 @@
   "settings": {
       "react": {
           "pragma": "React",
-          "version": "15.4.2"
+          "version": "16.4.1"
       }
   }
  }
