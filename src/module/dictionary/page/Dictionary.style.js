@@ -15,5 +15,24 @@ const sampleStyle = (theme) => createStyles({
         width: '50%',
         float: 'left'
     },
+    list: {
+        listStyle: 'none',
+    },
+    card: {
+        maxWidth: 275,
+        marginBottom: '10px'
+      },
+      bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+      },
+      title: {
+        marginBottom: 16,
+        fontSize: 14,
+      },
+      pos: {
+        marginBottom: 12,
+      },
 });
 export default sampleStyle;

@@ -6,6 +6,10 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 class Dictionary extends React.Component {
     constructor() {
@@ -40,7 +44,7 @@ class Dictionary extends React.Component {
                         en: 'See baby',
                         vi: 'Tam biet',
                     },
-                    type: 'n',
+                    type: 'noun',
                     image: 'https://image.png'
                 },
                 
@@ -50,17 +54,36 @@ class Dictionary extends React.Component {
 
     }
     additem(e) {
+        // if(this.inputen.value !== "" && this.inputvi.value !== "" ) {
+        //     var newitem = {
+        //         en: this.inputen.value,
+        //         vi: this.inputvi.value,
+        //         type: this.inputtype.value,
+        //         id: this.state.list.length
+        //     };
+        //     this.setState((prevState) =>{
+        //         return {
+        //             list: prevState.list.concat(newitem) 
+        //         };
+        //     });
+        //     this.inputen.value = "";
+        //     this.inputtype.value = "";
+        //     this.inputvi.value = "";
+        // } 
         if(this.inputen.value !== "" && this.inputvi.value !== "" ) {
-            var newitem = {
-                en: this.inputen.value,
-                vi: this.inputvi.value,
-                type: this.inputtype.value,
-                id: this.state.list.length
-            };
-            this.setState((prevState) =>{
-                return {
-                    list: prevState.list.concat(newitem) 
-                };
+            var newId = "3"
+            var newData = {
+                ...this.state.vocab,
+                [newId]: {
+                    word: this.inputen.value,
+                    type: this.inputtype.value,
+                    language: {
+                        vi: this.inputvi.value,
+                    },
+                }
+            }
+            console.log(newData);
+            this.state.vocabIndex.map(item => {return console.log(this.state.vocab[item]);
             });
             this.inputen.value = "";
             this.inputtype.value = "";
@@ -94,10 +117,32 @@ class Dictionary extends React.Component {
     }
     render() {
         const { classes } = this.props;
-        var listitem = this.state.list.map(item => { 
+        // var listitem = this.state.list.map(item => { 
+        //     return (
+        //         <li  key={item.id}>
+        //             {item.en} ({item.type}): {item.vi}
+        //         </li>
+        //     )
+        // })
+        var listitem = this.state.vocabIndex.map(item => { 
             return (
-                <li  key={item.id}>
-                    {item.en} ({item.type}): {item.vi}
+                <li key={this.state.vocab[item]}>
+                {/* {this.state.vocab[item].word} ({this.state.vocab[item].type}): {this.state.vocab[item].language.vi} */}
+                    <div>
+                        <Card className={classes.card}>
+                            <CardContent>
+                                <Typography variant="headline" component="h2">
+                                {this.state.vocab[item].word} 
+                                </Typography>
+                                <Typography className={classes.pos} color="textSecondary">
+                                {this.state.vocab[item].type}
+                                </Typography>
+                                <Typography component="p">
+                                {this.state.vocab[item].language.vi}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </div>
                 </li>
             )
         })
