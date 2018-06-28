@@ -71,7 +71,7 @@ class Dictionary extends React.Component {
         //     this.inputvi.value = "";
         // } 
         if(this.inputen.value !== "" && this.inputvi.value !== "" ) {
-            var newId = "3"
+            var newId = this.state.vocabIndex.length +1
             var newData = {
                 ...this.state.vocab,
                 [newId]: {
@@ -81,8 +81,15 @@ class Dictionary extends React.Component {
                         vi: this.inputvi.value,
                     },
                 }
-            }
-            console.log(newData);
+            };
+            // var newIndex = [...this.state.vocabIndex,this.state.vocabIndex.length+1] 
+        
+            // console.log(newIndex);
+            this.setState({
+                vocab: newData,
+                vocabIndex: [...this.state.vocabIndex,this.state.vocabIndex.length+1] 
+            });
+            console.log(this.state.vocab);
             this.state.vocabIndex.map(item => {return console.log(this.state.vocab[item]);
             });
             this.inputen.value = "";
@@ -92,29 +99,48 @@ class Dictionary extends React.Component {
         e.preventDefault();
     }
     searchitem(e) {
-        var dict = this.state.list;
-        for (var key in dict) {
+        // var dict = this.state.list;
+        // for (var key in dict) {
 
-        // Do stuff. ex: console.log(dict[key])
-            if(dict[key].en === this.inputen.value) {
-                console.log(dict[key].word);
+        // // Do stuff. ex: console.log(dict[key])
+        //     if(dict[key].en === this.inputen.value) {
+        //         console.log(dict[key].word);
+        //         var newitem = {
+        //             en: dict[key].en,
+        //             vi: dict[key].vi,
+        //             type: dict[key].type,
+        //         };
+        //         console.log(newitem);
+        //         this.setState((prevState) =>{
+        //             return {
+        //                 wordsearched: newitem,
+        //             };
+        //         });
+        //         this.inputen.value = "";
+        //     } 
+        //     console.log(dict[key]);
+        //     e.preventDefault();
+        // }
+        var serch = this.state.vocabIndex.map(item => {
+            if(this.state.vocab[item].word === this.inputen.value) {
                 var newitem = {
-                    en: dict[key].en,
-                    vi: dict[key].vi,
-                    type: dict[key].type,
-                };
+                        en: this.state.vocab[item].word,
+                        vi: this.state.vocab[item].language.vi,
+                        type: this.state.vocab[item].type,
+                    };
                 console.log(newitem);
                 this.setState((prevState) =>{
-                    return {
-                        wordsearched: newitem,
-                    };
-                });
+                        return {
+                            wordsearched: newitem,
+                        };
+                    });
                 this.inputen.value = "";
-            } 
-            console.log(dict[key]);
-            e.preventDefault();
-        }
-    }
+                console.log(this.state.vocab[item]);
+                } 
+                console.log(this.state.vocab[item]);
+                e.preventDefault();
+        })
+    }   
     render() {
         const { classes } = this.props;
         // var listitem = this.state.list.map(item => { 
