@@ -15,6 +15,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 import FileUpload from '@material-ui/icons/FileUpload';
 
 import { connect } from 'react-redux';
@@ -229,10 +231,12 @@ class TeoPage extends React.Component {
 
 
 		return (
+		//==================
+		// 
+		//==================
 		<Grid className={classes.content} container>
 			<Grid md={6} sm={12} item className={classes.column}>
 				<Typography variant="title">Search Vocabulary</Typography>
-
 				<Card className={classes.card}>
 					<CardContent>
 						<form onSubmit={(event) => this.onSearch(event, this.state.textSearch)} className={classes.container} noValidate autoComplete="off">
@@ -272,6 +276,9 @@ class TeoPage extends React.Component {
 					<Button onClick={this.handleClickOpen} variant="fab" color="primary" aria-label="Add" className={classes.fab}>
 						<AddIcon />
 					</Button>
+					<IconButton aria-label="Delete">
+						<DeleteIcon />
+					</IconButton>
 					<Dialog
 						open={this.state.open}
 						onClose={this.handleClose}
