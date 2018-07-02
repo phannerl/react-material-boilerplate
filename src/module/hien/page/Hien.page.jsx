@@ -1,27 +1,22 @@
+//import { React, withStyles, Card, CardMedia, CardContent, CardActions, Grid, Typography, TextField, Button, Icon, AddIcon, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, DeleteIcon, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, Checkbox, Avatar, FileUpload, omit, connect, sampleStyle } from './library.jsx';
 import * as React from 'react';
+
 import { withStyles } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import Grid from '@material-ui/core/Grid';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import { Card, CardMedia, CardContent, CardActions, TextField, Button, Grid, Typography } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import AddIcon from '@material-ui/icons/Add';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+import { List, ListItem, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox';
+import Avatar from '@material-ui/core/Avatar';
 import FileUpload from '@material-ui/icons/FileUpload';
+import { omit } from 'ramda';
 
 import { connect } from 'react-redux';
 import sampleStyle from './Hien.style';
-
+import HienSearch from './component/HienSearch.jsx'
 const styles = {
   card: {
 	minWidth: 275,
@@ -60,7 +55,7 @@ const types = [
     symbleDetail: 'Adjective',
   },
   {
-    vsymble: 'adv',
+    symble: 'adv',
     symbleDetail: 'Adverb',
   },
   {
@@ -83,7 +78,7 @@ class TeoPage extends React.Component {
 						vi: 'Xin chao',
 					},
 					type: 'n',
-					image: 'https://image.png'
+					image: 'home/teo/Downloads/20045501_1205810789524093_8778738808590821833_o.jpg'
 				},
 				'2': {
 					word: 'goodbye',
@@ -92,55 +87,27 @@ class TeoPage extends React.Component {
 						vi: 'Tam biet',
 					},
 					type: 'n',
-					image: 'https://image.png'
+					image: 'home/teo/Downloads/20045501_1205810789524093_8778738808590821833_o.jpg'
 				},
 				'3': {
 					word: 'goodnight',
 					language: {
 						en: 'See baby',
-						vi: 'Buoi toi vui ve',
+						vi: 'Chuc ngu ngon',
 					},
 					type: 'n',
-					image: 'https://image.png'
-				},
-				'4': {
-					word: 'good morning',
-					language: {
-						en: 'have a nice morning',
-						vi: 'Chao buoi sang',
-					},
-					type: 'n',
-					image: 'https://image.png'
+					image: 'home/teo/Downloads/20045501_1205810789524093_8778738808590821833_o.jpg'
 				},
 			},
-			vocabIndex: ['1', '2', '3', '4'],
-			textSearch:"",    
-			arrSearch : [],
+			vocabIndex: ['1', '2','3'],
 			open: false,
 			type: 'Noun',
 			textWord:"",
 			textMeanEn:"",
 			textMeanVi: "",
+			checked: [],
+			imagePreviewUrl:""
 		}
-	}
-	onChangeSearch (event){
-		this.setState({
-			textSearch: event.target.value,
-		})
-	}
-	onSearch (event, text){
-		event.preventDefault();
-		var dataFilted = this.state.vocabIndex.filter((key)=> {
-			console.log('DATA', this.state.vocab[key])
-			if(this.state.vocab[key].word.toUpperCase().indexOf(text.toUpperCase())>=0) return true
-			return false
-		})
-
-		console.log('dataFilted:', dataFilted)
-		// dataFilted = updatedLists.filter(updatedList =>{
-		//   return updatedList.toLowerCase().search(text.toLowerCase()) !== -1;
-		// });
-		this.setState({arrSearch: dataFilted});
 	}
 
 	handleClickOpen = () => {
@@ -173,6 +140,7 @@ class TeoPage extends React.Component {
 			textMeanVi: event.target.value,
 		})
 	}
+	// Function Upload File
 	handleImageChange = (event) => {
 		event.preventDefault();
 		let reader = new FileReader();
@@ -181,19 +149,14 @@ class TeoPage extends React.Component {
 		const self = this
 		reader.onload = function(upload) {
 			self.setState({
-				image: upload.target.result
+				image: upload.target.result,
+				imagePreviewUrl: reader.result
 			});
 		};
 		reader.readAsDataURL(file);    
 	}
 	onAddItem(event, word, meanen, meanvi, type, file) {
 		event.preventDefault();
-		console.log('handle uploading-', this.state.file);
-		console.log('word: ', word);
-		console.log('type: ', type);
-		console.log('meanen: ', meanen);
-		console.log('meanvi: ', meanvi);
-		console.log('file: ', file);
 		var newitem = {
 			word: word,
 			language: {
@@ -204,10 +167,10 @@ class TeoPage extends React.Component {
 			image: file
 		}
 		var length = this.state.vocabIndex.length;
-		console.log("5??: ",(parseInt(this.state.vocabIndex[3])+1).toString());
+		// console.log("5??: ",(parseInt(this.state.vocabIndex[3])+1).toString());
 		var clone_vocaIndex = this.state.vocabIndex
 		var arrVocabIndex = clone_vocaIndex.concat((parseInt(this.state.vocabIndex[length-1])+1).toString());
-		console.log('arrVocabIndex: ', arrVocabIndex);
+		// console.log('arrVocabIndex: ', arrVocabIndex);
 		var clone_vocab =  this.state.vocab
 		clone_vocab[(parseInt(this.state.vocabIndex[length-1])+1).toString()] = newitem
 
@@ -216,10 +179,41 @@ class TeoPage extends React.Component {
 			vocabIndex: arrVocabIndex
 		})
 	}
+	//Select Delete
+	handleToggle = value => () => {
+		const { checked } = this.state;
+		const currentIndex = checked.indexOf(value);
+		const newChecked = [...checked];
+
+		if (currentIndex === -1) {
+			newChecked.push(value);
+		} else {
+			newChecked.splice(currentIndex, 1);
+		}
+
+		this.setState({
+			checked: newChecked,
+		});
+
+	}
+	// Button Delete
+	handleDelete(event){
+		const { checked, vocab, vocabIndex } = this.state;
+		const dataDeleted = omit(checked, vocab);
+		const vocabIndexDeleted = vocabIndex.filter((id) => !checked.includes(id))
+	
+		this.setState({
+			vocab: dataDeleted,
+			vocabIndex: vocabIndexDeleted
+		})
+	}
+
+
 	render() {
+		console.log('vocal render: ', this.state.vocab)
 		console.log("arrSearch:", this.state.arrSearc, this.state);
 		const { classes }  = this.props;
-		const { arrSearch } = this.state
+		const { arrSearch,vocab, vocabIndex } = this.state
 		const bull = <span className={classes.bullet}>•</span>;
 		let {imagePreviewUrl} = this.state;
 		let $imagePreview = null;
@@ -228,55 +222,24 @@ class TeoPage extends React.Component {
 			} else {
 				$imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
 		}
-
-
+		console.log('checked: ', this.state.checked);
+		// console.log('file: ', this.state.vocab[4].image);
+		
+		console.log('arrVocalIndex render: ', this.state.vocabIndex)
 		return (
-		//==================
-		// 
-		//==================
-		<Grid className={classes.content} container>
+		
+		<Grid className={classes.content} container >
+			{/* Seach */}
+			<HienSearch vocab={vocab} arrSearch={arrSearch} vocabIndex={vocabIndex} />
+			{/* List - Add - Delete */}
 			<Grid md={6} sm={12} item className={classes.column}>
-				<Typography variant="title">Search Vocabulary</Typography>
-				<Card className={classes.card}>
-					<CardContent>
-						<form onSubmit={(event) => this.onSearch(event, this.state.textSearch)} className={classes.container} noValidate autoComplete="off">
-							<TextField
-								defaultValue={this.state.textSearch}
-								onChange={this.onChangeSearch.bind(this)}
-							/>
-							<input className={classes.input} type="submit" value="Submit" />
-						</form>
-					{   arrSearch.length < 1
-						?	<h1>Not found</h1> 
-						: 	arrSearch.map((key, index) => 
-								(
-									<div key={key} className={classes.cardSeperate}>
-										<CardContent>
-											<Typography variant="headline" component="h2">
-												{this.state.vocab[key].word}
-											</Typography>
-											<Typography className={classes.pos} color="textSecondary">
-												{keyTypeToString(this.state.vocab[key].type)}
-											</Typography>
-											<Typography component="p">
-												{this.state.vocab[key].language.vi}
-											</Typography>
-										</CardContent>
-									</div>
-								)
-							) 
-					}
-					</CardContent>
-					
-				</Card>
-			</Grid>
-			<Grid md={6} sm={12} item spacing={20} className={classes.column}>
 				<div>
 					<Typography variant="title">List Vocabulary</Typography>
+					{/* ADD*/}
 					<Button onClick={this.handleClickOpen} variant="fab" color="primary" aria-label="Add" className={classes.fab}>
 						<AddIcon />
 					</Button>
-					<IconButton aria-label="Delete">
+					<IconButton aria-label="Delete" onClick={(event) => this.handleDelete(event)}>
 						<DeleteIcon />
 					</IconButton>
 					<Dialog
@@ -337,11 +300,13 @@ class TeoPage extends React.Component {
 									helperText="Please select your type"
 									margin="normal"
 								>
-									{types.map(option => (
-									<option key={option.symble} value={option.symble}>
-										{option.symbleDetail}
-									</option>
-									))}
+									{types.map(option => {
+										return (
+											<option key={option.symble} value={option.symble}>
+												{option.symbleDetail}
+											</option>
+											)
+									})}
 								</TextField>
 								<div className={classes.button}>
 									<Button variant="contained" color="default" className={classes.button}>
@@ -364,32 +329,29 @@ class TeoPage extends React.Component {
 							</DialogActions>
 						</form>
 					</Dialog>
-					{
-						this.state.vocabIndex.map(key => (
-							<div key={key} >
-								<Card classes={{
-										root: classes.card
-									}}>
-									<CardMedia
-										className={classes.cover}
-										image={this.state.vocab[key].image}
-										title="Live from space album cover"
-										/>	
-									<CardContent>
-										<Typography variant="headline" component="h2">
-											{this.state.vocab[key].word}
-										</Typography>
-										<Typography className={classes.pos} color="textSecondary">
-											{keyTypeToString(this.state.vocab[key].type)}
-										</Typography>
-										<Typography component="p">
-											{this.state.vocab[key].language.vi}
-										</Typography>
-									</CardContent>
-								</Card>
+					{/* List */}
+					<Card classes={{
+							root: classes.card
+					}}>
+					<List>
+						{this.state.vocabIndex.map(key => (
+							<div key={key}>
+							<ListItem key={key} dense button className={classes.listItem}>
+								<Avatar alt="Image" src={this.state.vocab[key].image} />
+								<ListItemText primary={this.state.vocab[key].word} />
+								<ListItemText primary={keyTypeToString(this.state.vocab[key].type)} />
+								<ListItemText primary={this.state.vocab[key].language.vi} />
+								<ListItemSecondaryAction>
+									<Checkbox
+									onChange={this.handleToggle(key)}
+									checked={this.state.checked.indexOf(key) !== -1}
+									/>
+								</ListItemSecondaryAction>
+							</ListItem>
 							</div>
-						))
-					}
+						))}
+					</List>
+					</Card>
 				</div>
 			</Grid>
 		</Grid>);
