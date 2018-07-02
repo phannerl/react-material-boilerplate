@@ -14,16 +14,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
-import Modal from '@material-ui/core/Modal';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import Inputvi from './component/listdict';
+import Dictmodal from './component/dictmodal';
 
 class Dictionary extends React.Component {
     constructor() {
         super();
-        console.log('>>>>>>>>>>>>')
         this.state = {
             word: {
                 id: 0,
@@ -46,7 +42,8 @@ class Dictionary extends React.Component {
                         vi: 'Xin chào',
                     },
                     type: 'noun',
-                    image: 'https://image.png'
+                    image: 'https://image.png',
+                    done: 'false',
                 },
                 '2': {
                     word: 'Good bye',
@@ -55,7 +52,8 @@ class Dictionary extends React.Component {
                         vi: 'Tạm biệt',
                     },
                     type: 'noun',
-                    image: 'https://image.png'
+                    image: 'https://image.png',
+                    done: 'false',
                 },
                 '3': {
                     word: 'Good',
@@ -64,7 +62,8 @@ class Dictionary extends React.Component {
                         vi: 'Tốt',
                     },
                     type: 'adjective',
-                    image: 'https://image.png'
+                    image: 'https://image.png',
+                    done: 'false',
                 },
                 '4': {
                     word: 'Perception',
@@ -73,15 +72,18 @@ class Dictionary extends React.Component {
                         vi: 'Sự nhận thức',
                     },
                     type: 'noun',
-                    image: 'https://image.png'
+                    image: 'https://image.png',
+                    done: 'false',
                 },
                 
             },
             vocabIndex: ['1', '2', '3', '4'],
             open: false,
+            
     }
 
     }
+   
     additem(e) {
         // if(this.inputen.value !== "" && this.inputvi.value !== "" ) {
         //     var newitem = {
@@ -111,6 +113,8 @@ class Dictionary extends React.Component {
                     },
                 }
             };
+
+
             // var newIndex = [...this.state.vocabIndex,this.state.vocabIndex.length+1] 
         
             // console.log(newIndex);
@@ -150,7 +154,7 @@ class Dictionary extends React.Component {
         //     console.log(dict[key]);
         //     e.preventDefault();
         // }
-        if(this.inputen.value !== "" && this.inputvi.value === "" ) {
+        if(this.inputen.value !== "" && this.inputviNew.getValue() === "" ) {
             var serch = this.state.vocabIndex.map(item => {
                 if(this.state.vocab[item].word === this.inputen.value) {
                     var newitem = {
@@ -165,12 +169,19 @@ class Dictionary extends React.Component {
                             };
                         });
                     this.inputen.value = "";
-                    console.log(this.state.vocab[item]);
+                    //console.log(this.state.vocab[item]);
                     } 
-                    console.log(this.state.vocab[item]);
+                    //console.log(this.state.vocab[item]);
                     e.preventDefault();
             })
         }
+        // if(this.inputen.value !== "" && this.inputvi.value === "" ) {
+        //     var serch = this.state.vocabIndex.filter((key)=> {
+        //         console.log('DATA', this.state.vocab[key])
+        //         if(this.state.vocab[key].word.toUpperCase().indexOf(text.toUpperCase())>=0) return true
+        //         return false
+        //     })
+        // }
         else if(this.inputvi.value !== "" && this.inputen.value === "" ) {
             console.log(this.inputvi.value);
             var serchvi = this.state.vocabIndex.map(item => {
@@ -195,12 +206,12 @@ class Dictionary extends React.Component {
 
     }   
 
-    handleClose = () =>{
-        this.setState({ open: false });
+    updateData = (newItem) => {
+        this.setState({
+            vocab: newItem,
+            vocabIndex: [...this.state.vocabIndex,this.state.vocabIndex.length+1] 
+        });
     }
-    handleClickOpen = () => {
-        this.setState({ open: true });
-    };
     render() {
         const { classes } = this.props;
         // var listitem = this.state.list.map(item => { 
@@ -210,30 +221,10 @@ class Dictionary extends React.Component {
         //         </li>
         //     )
         // })
-        var listitem = this.state.vocabIndex.map(id => { 
-            return (
-                <li key={id}>
-                {/* {this.state.vocab[item].word} ({this.state.vocab[item].type}): {this.state.vocab[item].language.vi} */}
-                    <div>
-                        <Card className={classes.card}>
-                            <CardContent>
-                                <Typography variant="headline" component="h2">
-                                {this.state.vocab[id].word} 
-                                </Typography>
-                                <Typography className={classes.pos} color="textSecondary">
-                                {this.state.vocab[id].type}
-                                </Typography>
-                                <Typography component="p">
-                                {this.state.vocab[id].language.vi}
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </div>
-                </li>
-            )
-        })
+        console.log('>>>', this.state.vocab)
         var wordfound = this.state.wordsearched
         return (
+            
             <div>
                 <div className={classes.left}>
                     <Card className={classes.cardbig}>
@@ -251,7 +242,7 @@ class Dictionary extends React.Component {
                                         inputRef={(a) => this.inputen = a}
                                     />
                                     <br/>
-                                    <Input
+                                    {/* <Input
                                         id="input-with-icon-adornment-1"
                                         startAdornment={
                                             <i className="far fa-edit"></i>
@@ -259,19 +250,11 @@ class Dictionary extends React.Component {
                                         placeholder="Vietnamese"
                                         inputRef={(c) => this.inputvi = c}
                                         onChange={this.handleChange}
-                                    />
-                                    <br/>
-                                    <Input
-                                        id="input-with-icon-adornment-1"
-                                        startAdornment={
-                                            <i className="far fa-edit"></i>
-                                        }
-                                        placeholder="Vietnamese"
-                                        inputRef={(c) => this.inputvi = c}
-                                        onChange={this.handleChange}
+                                    /> */}
+                                    <Inputvi
+                                        ref={(inputviref) => this.inputviNew = inputviref}
                                     />
                                     </FormControl>
-                                    
                                     <Button variant="outlined" color="primary" className={classes.button} onClick={this.searchitem.bind(this)}>Search</Button>
                                 </form>   
                             </CardContent>
@@ -287,65 +270,8 @@ class Dictionary extends React.Component {
                         </Card>
                     </div>
                     <div className={classes.right}>
-                    <Card className={classes.cardbig}>
-                        <CardContent>
-                            <Button className = {classes.margina} onClick={this.handleClickOpen}>Add a new word</Button>
-                            <Dialog
-                                open={this.state.open}
-                                onClose={this.handleClose}
-                                aria-labelledby="form-dialog-title"
-                            >
-                                <DialogTitle id="form-dialog-title">Add a new word</DialogTitle>
-                                <DialogContent>
-                                <form >
-                                    <FormControl className = {classes.margin}>
-                                    <InputLabel htmlFor="input-with-icon-adornment">Enter A Word</InputLabel>
-                                    <Input
-                                        id="input-with-icon-adornment"
-                                        startAdornment={
-                                            <i className="far fa-edit"></i>
-                                        }
-                                        placeholder="English"
-                                        inputRef={(a) => this.inputen = a}
-                                    />
-                                    <br/>
-                                    <Input
-                                        id="input-with-icon-adornment"
-                                        startAdornment={
-                                            <i className="far fa-edit"></i>
-                                        }
-                                        placeholder="Parts of Speech"
-                                        inputRef={(b) => this.inputtype = b}
-                                    />
-                                    <br/>
-                                    <Input
-                                        id="input-with-icon-adornment-1"
-                                        startAdornment={
-                                            <i className="far fa-edit"></i>
-                                        }
-                                        placeholder="Vietnamese"
-                                        inputRef={(c) => this.inputvi = c}
-                                        onChange={this.handleChange}
-                                    />
-                                    </FormControl>
-                                    <Button onClick={this.additem.bind(this)}>Add</Button>
-                                </form>
-                                </DialogContent>
-                                <DialogActions>
-                                    <Button onClick={this.handleClose} color="primary">
-                                    Cancel
-                                    </Button>
-                                </DialogActions>
-                            </Dialog>
-                            <div className = {classes.margin}>
-                                <h1>List word</h1>
-                                <ul className = {classes.list}>
-                                    {listitem}
-                                </ul> 
-                            </div>
-                        </CardContent>
-                    </Card>
-                </div>           
+                    <Dictmodal classes={classes} updateData={this.updateData} vocab = {this.state.vocab} vocabIndex = {this.state.vocabIndex}/>
+                </div>
             </div>
         );
     }
