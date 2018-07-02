@@ -107,7 +107,6 @@ export default class Dictmodal extends Component {
 		this.props.vocab[key].done(key)
 	}
     render() {
-        console.log(add(2, 3))
         const {classes} = this.props
         var listitem = this.props.vocabIndex.map(id => { 
             return (
