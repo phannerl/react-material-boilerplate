@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import Input from '@material-ui/core/Input';
 
 export default class Inputvi extends Component {
-    getValue=()=>{
+    getValue = () => {
         return this.inputvi.value
+    }
+    setValue = (value) => {
+        this.inputvi.value = value
     }
     render() {
     return (

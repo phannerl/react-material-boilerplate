@@ -14,11 +14,17 @@
   ],
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
-      "comma-dangle": 0,
-      "no-unused-vars": 0,
-      "react/prop-types": 0,
-      "no-undef": 0,
-      "no-console": 0
+        "comma-dangle": 0,
+        "react/prop-types": 0,
+        "no-console": 0,
+        "no-const-assign": "warn",
+        "no-this-before-super": "warn",
+        "no-undef": "warn",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "constructor-super": "warn",
+        "valid-typeof": "warn",
+        "no-extra-semi":"error"
   },
   "settings": {
       "react": {

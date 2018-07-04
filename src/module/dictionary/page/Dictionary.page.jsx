@@ -77,11 +77,8 @@ class Dictionary extends React.Component {
                 },
                 
             },
-            vocabIndex: ['1', '2', '3', '4'],
-            open: false,
-            
-    }
-
+            vocabIndex: ['1', '2', '3', '4'],      
+        }
     }
    
     additem(e) {
@@ -206,12 +203,7 @@ class Dictionary extends React.Component {
 
     }   
 
-    updateData = (newItem) => {
-        this.setState({
-            vocab: newItem,
-            vocabIndex: [...this.state.vocabIndex,this.state.vocabIndex.length+1] 
-        });
-    }
+    
     render() {
         const { classes } = this.props;
         // var listitem = this.state.list.map(item => { 

@@ -7,15 +7,6 @@ class AppTextField extends React.Component {
         this.state = {
             text: this.props.value || '',
         };
-        // static getDerivedStateFromProps(props: IAppTextFieldConnectedExtendedProps, state: AppTextField.State) {
-        //   console.log('>>>>PROPS', props, state)
-        //   if (props.value) {
-        //     return {
-        //       text: props.value,
-        //     }
-        //   }
-        //   return null
-        // }
         this.onChange = (event) => {
             const { value } = event.target;
             this.setState({
