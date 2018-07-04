@@ -1,6 +1,4 @@
 import * as React from 'react';
-
-
 import { withStyles } from '@material-ui/core';
 import { Card, CardMedia, CardContent, CardActions } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -18,6 +16,7 @@ import FileUpload from '@material-ui/icons/FileUpload';
 import { omit } from 'ramda';
 import sampleStyle from '../Hien.style.js'
 import { connect } from 'react-redux';
+
 const keyTypeToString = (type) => {
 	switch(type) {
 		case 'n': return 'Noun'
@@ -25,6 +24,7 @@ const keyTypeToString = (type) => {
 		default: return 'donno'
 	}
 }
+
 class HienSearch extends React.PureComponent {
 	state= {
 		textSearch: '',
@@ -49,7 +49,7 @@ class HienSearch extends React.PureComponent {
 	// 	return true
 	// }
 	render(){
-		const { classes, vocab, vocabIndex }  = this.props;
+		const { classes, vocab }  = this.props;
 		const { textSearch, arrSearch =[] } = this.state
 		return(
 			<Grid md={6} sm={12} item className={classes.column}>

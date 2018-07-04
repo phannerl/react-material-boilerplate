@@ -1,4 +1,5 @@
 import HienPage from './Hien.page';
+import HienSinglePage from './HienSingle.page';
 export const page = {
 	route: {
 		hien: {
@@ -7,6 +8,12 @@ export const page = {
 			component: HienPage,
 			sidebarName: 'HienPage',
 			navBarName: 'HienPage',	
-		}
+		},
+		hienSingle: {
+			path: '/hien/:id',
+			component: HienSinglePage,
+			navBarName: 'Hien Single',
+		},
+
 	},
 };
